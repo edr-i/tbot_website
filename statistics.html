@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>T-Bot</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <style>
+        .header-image {
+            background-image: url("images/background.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="index.html">Home</a>
+                <a class="navbar-item" href="product.html">Product</a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Documentation
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Software
+                        </a>
+                        <a class="navbar-item">
+                            Website
+                        </a>
+                        <a class="navbar-item">
+                            Control System
+                        </a>
+                        <a class="navbar-item">
+                            Database
+                        </a>
+                    </div>
+                </div>
+                <a class="navbar-item">3D Simulation</a>
+                <a class="navbar-item" href="statistics.html">Statistics</a>
+                <a class="navbar-item" href="team.html">Team</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero is-medium header-image">
+        <div class="hero-body has-text-centered">
+            <h1 class="title is-1" style="color: white;">Statistics</h1>
+            <p class="subtitle" style="color: white;">
+                Some boring numbers.
+            </p>
+        </div>
+    </section>
+
+    <h1 class="counter title is-1 columns is-centered m-5" data-target="350" style="font-size: 100px;">0</h1>
+    <h2 class="subtitle columns is-centered">Steps taken</h2>
+
+    <h1 class="counter title is-1 columns is-centered m-5" data-target="451" style="font-size: 100px;">0</h1>
+    <h2 class="subtitle columns is-centered">Seconds spent walking</h2>
+
+    <h1 class="counter title is-1 columns is-centered m-5" data-target="128" style="font-size: 100px;">0</h1>
+    <h2 class="subtitle columns is-centered">Meters covered</h2>
+
+    <div class="notification is-warning is-light m-5">
+        <button class="delete"></button>
+        Please note that for the time being, the above numbers are close <strong>estimates</strong>. Our database undergoes maintanance often, which might mess with the existing records. However, these numbers help us understand how far we've come!
+    </div>
+
+</body>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            © 2022. <strong>T-Bot</strong> by Edri, Sindi and Toni. All rights reserved.
+        </p>
+    </div>
+</footer>
+
+</html>
+
+<script>
+    const counters = document.querySelectorAll('.counter');
+    for (let n of counters) {
+        const updateCount = () => {
+            const target = + n.getAttribute('data-target');
+            const count = + n.innerText;
+            const speed = 5000; // animation speed
+            const inc = target / speed;
+            if (count < target) {
+                n.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 1);
+            } else {
+                n.innerText = target;
+            }
+        }
+        updateCount();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+</script>
